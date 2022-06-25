@@ -1,26 +1,43 @@
 #include<bits/stdc++.h>
 using namespace std;
-class Solution {
-public:
-    int func(int node,vector<vector<int>>& g,vector<int>& time)
+string func(int input1,string input2)
+{
+    string ans = "";
+    int j = 0,k=0;
+    vector<char> med(input1);
+    for(int i=0;i<input1;i++)
     {
-        if(g[node].size()==0) return 0;
-        int sum = -1;
-        for(auto a: g[node])
+        //cout<<"hkh"<<endl;
+        if(i==0 || med[j-1]<=input2[i])
         {
-            sum = max(sum,time[node]+func(a,g,time));
+            
+            med[j++] = input2[i]; 
+           // cout<<med[j-1]<<"  "<<input2[i]<<endl;
         }
-        return sum;
-    }
-    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-       vector<vector<int>> g(n);
-        for(int i=0;i<n;i++)
+        else
         {
-            if(manager[i]!=-1)
-            {
-                g[manager[i]].push_back(i);
-            }
+            ans+= input2[i];
         }
-        return func(headID,g,informTime);
     }
-};
+
+   // cout<<ans<<endl;
+    for(int i= j;i>=0;i--)
+    {
+        
+        ans+= med[i];
+    }
+    return ans;
+}
+
+int main()
+{
+    string s = "cba";
+
+    string a = func(3,s);
+
+    cout<<a<<endl;
+
+
+
+    return 0;
+}
